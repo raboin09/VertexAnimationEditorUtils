@@ -31,3 +31,27 @@ UMaterialInterface* UVertexAnimationEditorStatics::MakeMaterialInstance(UMateria
 	}
 	return MaterialInstance;
 }
+
+void UVertexAnimationEditorStatics::ToggleTangentSpaceNormalOnBaseMaterial(UMaterialInstanceConstant* MaterialChild, bool bNewValue)
+{
+	if (!MaterialChild)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("MaterialInstance is null!"));
+		return;
+	}
+
+	// Get the base UMaterial
+	UMaterial* BaseMaterial = MaterialChild->GetBaseMaterial();
+	if (!BaseMaterial)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Could not get the base material from the material instance!"));
+		return;
+	}
+
+	if(BaseMaterial->bTangentSpaceNormal != bNewValue)
+	{
+		BaseMaterial->bTangentSpaceNormal = bNewValue;
+		BaseMaterial->MarkPackageDirty(); // Mark as dirty so changes can be saved
+		BaseMaterial->PostEditChange();   // Notify the editor of the change in property	
+	}
+}

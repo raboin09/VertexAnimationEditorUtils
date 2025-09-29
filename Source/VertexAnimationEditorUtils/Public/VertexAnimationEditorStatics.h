@@ -16,5 +16,6 @@ class VERTEXANIMATIONEDITORUTILS_API UVertexAnimationEditorStatics : public UBlu
 public:
 	UFUNCTION(BlueprintCallable, Category = "VertexAnimationEditorUtils")
 	static UMaterialInterface* MakeMaterialInstance(UMaterialInterface* Material, const FString& NewMaterialName);
-	
+	UFUNCTION(BlueprintCallable, Category = "VertexAnimationEditorUtils")
+	static void ToggleTangentSpaceNormalOnBaseMaterial(UMaterialInstanceConstant* MaterialChild, bool bNewValue);
 };
